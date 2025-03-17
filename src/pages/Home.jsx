@@ -24,7 +24,9 @@ function Home() {
 
     loadPopularMovies();
   }, []);
-
+  useEffect(() => {
+    console.log(movies);
+  });
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
