@@ -46,7 +46,7 @@ function Overview() {
       };
       getEarchedMovies();
     }
-  }, [movieId, searchQuery, searchResults]);
+  }, [movieId, searchQuery, searchResults, arrayChecker]);
 
   if (loading)
     return (

@@ -1,9 +1,10 @@
 import "../css/Favorites.css";
 import { MovieContext } from "../contexts/MovieContext";
 import MovieCard from "../components/MovieCard";
+import { useContext } from "react";
 
 function Favorites() {
-  const { favorites } = MovieContext();
+  const { favorites } = useContext(MovieContext);
 
   if (favorites) {
     return (

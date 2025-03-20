@@ -38,8 +38,6 @@ function Home() {
     try {
       const searchResultsData = await searchMovies(searchQuery);
       setMovies(searchResultsData);
-      // console.log(searchResults);
-      console.log(movies);
       setSearchResults(movies);
       setArrayChecker(false);
       setError(null);
