@@ -1,32 +1,52 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { getPopularMovies } from "../services/api";
+import { getPopularMovies, searchMovies } from "../services/api";
 import "../css/overview.css";
+import { MovieContext } from "../contexts/MovieContext";
 
 function Overview() {
-  const cardRef = useRef(null);
+  const { searchResults, searchQuery } = useContext(MovieContext);
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const { movieId } = useParams();
 
   useEffect(() => {
-    const loadPopularMovies = async () => {
-      try {
-        const popularMovies = await getPopularMovies();
-        const current_movie = popularMovies.find((movie) => {
-          return Number(movie.id) === Number(movieId);
-        });
-        setMovie(current_movie);
-      } catch (err) {
-        console.error(err);
-        setError("Failed to load movie details. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadPopularMovies();
-  }, [movieId]);
+    console.log(searchResults);
+    if (!searchResults) {
+      const loadPopularMovies = async () => {
+        try {
+          const popularMovies = await getPopularMovies();
+          const current_movie = popularMovies.find((movie) => {
+            return Number(movie.id) === Number(movieId);
+          });
+          setMovie(current_movie);
+        } catch (err) {
+          console.error(err);
+          setError("Failed to load movie details. Please try again later.");
+        } finally {
+          setLoading(false);
+        }
+      };
+      loadPopularMovies();
+    } else {
+      const getEarchedMovies = async () => {
+        try {
+          const searchResults = await searchMovies(searchQuery);
+          const current_movie = searchResults.find((movie) => {
+            return Number(movie.id) === Number(movieId);
+          });
+          setMovie(current_movie);
+        } catch (err) {
+          console.error(err);
+          setError("Failed to load movie details. Please try again later.");
+        } finally {
+          setLoading(false);
+        }
+      };
+      getEarchedMovies();
+    }
+  }, [movieId, searchQuery, searchResults]);
 
   if (loading)
     return (
@@ -41,7 +61,7 @@ function Overview() {
 
   return (
     <div className="movie-overview-container">
-      <div ref={cardRef} className="movie-overview">
+      <div className="movie-overview">
         <div className="movie-photo">
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

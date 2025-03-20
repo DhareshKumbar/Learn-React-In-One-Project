@@ -1,11 +1,13 @@
 import MovieCard from "../components/MovieCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { searchMovies, getPopularMovies } from "../services/api";
 import "../css/Home.css";
 import { Link } from "react-router-dom";
+import { MovieContext } from "../contexts/MovieContext";
 
 function Home() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const { /* searchResults, */ setSearchResults, searchQuery, setSearchQuery } =
+    useContext(MovieContext);
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -25,9 +27,7 @@ function Home() {
 
     loadPopularMovies();
   }, []);
-  useEffect(() => {
-    console.log(movies);
-  });
+
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
@@ -37,6 +37,7 @@ function Home() {
     try {
       const searchResults = await searchMovies(searchQuery);
       setMovies(searchResults);
+      setSearchResults(movies);
       setError(null);
     } catch (err) {
       console.log(err);

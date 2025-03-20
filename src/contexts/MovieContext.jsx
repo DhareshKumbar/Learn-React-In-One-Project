@@ -5,6 +5,8 @@ const MovieContext = createContext();
 
 const MovieProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const storedFavs = localStorage.getItem("favorites");
@@ -33,6 +35,10 @@ const MovieProvider = ({ children }) => {
     addToFavorites,
     removeFromFavorites,
     isFavorite,
+    searchResults,
+    setSearchResults,
+    searchQuery,
+    setSearchQuery,
   };
 
   return (
