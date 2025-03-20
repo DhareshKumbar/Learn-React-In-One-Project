@@ -7,6 +7,7 @@ const MovieProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [arrayChecker, setArrayChecker] = useState(false);
 
   useEffect(() => {
     const storedFavs = localStorage.getItem("favorites");
@@ -39,6 +40,8 @@ const MovieProvider = ({ children }) => {
     setSearchResults,
     searchQuery,
     setSearchQuery,
+    arrayChecker,
+    setArrayChecker,
   };
 
   return (

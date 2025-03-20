@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { MovieContext } from "../contexts/MovieContext";
 
 function Home() {
-  const { /* searchResults, */ setSearchResults, searchQuery, setSearchQuery } =
+  const { setSearchResults, searchQuery, setSearchQuery, setArrayChecker } =
     useContext(MovieContext);
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
@@ -17,6 +17,7 @@ function Home() {
       try {
         const popularMovies = await getPopularMovies();
         setMovies(popularMovies);
+        setArrayChecker(true);
       } catch (err) {
         console.log(err);
         setError("Failed to load movies...");
@@ -35,9 +36,12 @@ function Home() {
 
     setLoading(true);
     try {
-      const searchResults = await searchMovies(searchQuery);
-      setMovies(searchResults);
+      const searchResultsData = await searchMovies(searchQuery);
+      setMovies(searchResultsData);
+      // console.log(searchResults);
+      console.log(movies);
       setSearchResults(movies);
+      setArrayChecker(false);
       setError(null);
     } catch (err) {
       console.log(err);

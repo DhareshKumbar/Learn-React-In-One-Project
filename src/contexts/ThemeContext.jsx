@@ -27,7 +27,6 @@ const ThemeProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("theme", theme);
     document.documentElement.setAttribute("data-theme", theme);
-    // For Tailwind users: document.documentElement.classList.toggle('dark', theme === 'dark');
   }, [theme]);
 
   return (

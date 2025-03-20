@@ -1,0 +1,5 @@
+/* Select elements with a specific data attribute value */
+[data-theme="light"] {
+    background-color: #ddffd9;
+    color: #213547;
+}

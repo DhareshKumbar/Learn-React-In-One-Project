@@ -5,15 +5,15 @@ import "../css/overview.css";
 import { MovieContext } from "../contexts/MovieContext";
 
 function Overview() {
-  const { searchResults, searchQuery } = useContext(MovieContext);
+  const { searchResults, searchQuery, arrayChecker } = useContext(MovieContext);
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const { movieId } = useParams();
 
   useEffect(() => {
-    console.log(searchResults);
-    if (!searchResults) {
+    // console.log(typeof searchResults);
+    if (arrayChecker) {
       const loadPopularMovies = async () => {
         try {
           const popularMovies = await getPopularMovies();
