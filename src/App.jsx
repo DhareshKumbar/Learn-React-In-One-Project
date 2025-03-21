@@ -21,6 +21,7 @@ function App() {
               path="/movie-overview/:movieId/:movieTitle"
               element={<Overview />}
             />
+            <Route path="*" element={<Home />} />
           </Routes>
         </main>
       </ThemeProvider>
