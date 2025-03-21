@@ -111,6 +111,8 @@
 @media (max-width: 768px) {
     .movie-card {
         font-size: 0.9rem;
+        width: 290px;
+        margin-inline: auto;
     }
 
     .movie-info {
