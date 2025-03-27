@@ -1,6 +1,6 @@
 import "../css/MovieCard.css";
 import { MovieContext } from "../contexts/MovieContext";
-import LazyLoad from "react-lazyload";
+// import LazyLoad from "react-lazyload";
 import propTypes from "prop-types";
 import { useContext, useState } from "react";
 
@@ -20,22 +20,22 @@ function MovieCard({ movie }) {
   return (
     <div className="movie-card">
       <div className="movie-poster">
-        <LazyLoad width={500} className="lazy-load-container">
-          {!imageError ? (
-            <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt={movie.title}
-              loading="lazy"
-              onError={() => setImageError(true)}
-            />
-          ) : (
-            <div className="poster-fallback">
-              <div className="poster-fallback-text">
-                {movie.title || "Image not available"}
-              </div>
+        {/* <LazyLoad width={500} className="lazy-load-container"> */}
+        {!imageError ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.title}
+            // loading="lazy"
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <div className="poster-fallback">
+            <div className="poster-fallback-text">
+              {movie.title || "Image not available"}
             </div>
-          )}
-        </LazyLoad>
+          </div>
+        )}
+        {/* </LazyLoad> */}
         <div className="movie-overlay">
           <button
             className={`favorite-btn ${favorite ? "active" : ""}`}

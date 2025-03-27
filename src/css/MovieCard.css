@@ -131,7 +131,7 @@
 
 .poster-fallback {
     min-height: 300px; /* Adjust to your desired height */
-    background-color: #f0f0f0; /* Light gray background */
+    background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
