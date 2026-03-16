@@ -1,4 +1,4 @@
-import {createContext, useState, useContext, useEffect} from "react"
+import {createContext, useState, useContext, useEffect, useMemo} from "react"
 
 const MovieContext = createContext()
 
@@ -29,12 +29,15 @@ export const MovieProvider = ({children}) => {
         return favorites.some(movie => movie.id === movieId)
     }
 
-    const value = {
+    // useMemo keeps the same object reference until favorites changes.
+    // Without it, a new object is created every render, and since { a: 1 } !== { a: 1 } (referential equality),
+    // React would re-render every consumer of this context even when favorites hasn't changed.
+    const value = useMemo(() => ({
         favorites,
         addToFavorites,
         removeFromFavorites,
         isFavorite
-    }
+    }), [favorites])
 
     return <MovieContext.Provider value={value}>
         {children}
