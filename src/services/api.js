@@ -1,5 +1,5 @@
-const API_KEY = "";
-const BASE_URL = "https://api.themoviedb.org/3";
+const API_KEY = "f757dc85";
+const BASE_URL = "https://www.omdbapi.com/";
 
 export const getPopularMovies = async () => {
   const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
@@ -9,7 +9,7 @@ export const getPopularMovies = async () => {
 
 export const searchMovies = async (query) => {
   const response = await fetch(
-    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+    `${BASE_URL}/api_key=${API_KEY}&s==${encodeURIComponent(
       query
     )}`
   );
